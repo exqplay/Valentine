@@ -3,7 +3,7 @@
 // SHA-256 хэш пароля
 // (как получить — ниже)
 const PASSWORD_HASH =
-  "PUT_HASH_HERE";
+  "Pa4963c50cd25fdf92fee9178af3655b0eaff2938adc1fa0e074d25e6f456fd74";
 
 // загадки
 const questions = [
