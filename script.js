@@ -1,9 +1,11 @@
 // ===== НАСТРОЙКИ =====
 
-// пароль → захешируй свой (см. ниже)
-const PASSWORD_HASH = "1baeaac16f20ceeb14f8e573cc8ae457";
+// SHA-256 хэш пароля
+// (как получить — ниже)
+const PASSWORD_HASH =
+  "PUT_HASH_HERE";
 
-// загадки и ответы (ответы — числа)
+// загадки
 const questions = [
   {
     text: "Сколько букв в слове «любовь»?",
@@ -23,23 +25,25 @@ const questions = [
 
 let currentStep = Number(localStorage.getItem("step")) || 0;
 
-// элементы
+// DOM
 const passwordScreen = document.getElementById("password-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const finalScreen = document.getElementById("final-screen");
 const questionTitle = document.getElementById("question-title");
 const answerInput = document.getElementById("answer-input");
 const answerError = document.getElementById("answer-error");
+const passwordError = document.getElementById("password-error");
 
-// если уже прошла пароль
+// автологин
 if (localStorage.getItem("access") === "true") {
+  passwordScreen.classList.remove("active");
   showQuiz();
 }
 
-// хэш-функция
-async function hash(text) {
-  const msgUint8 = new TextEncoder().encode(text);
-  const hashBuffer = await crypto.subtle.digest("MD5", msgUint8);
+// SHA-256
+async function sha256(text) {
+  const data = new TextEncoder().encode(text);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
   return Array.from(new Uint8Array(hashBuffer))
     .map(b => b.toString(16).padStart(2, "0"))
     .join("");
@@ -47,16 +51,22 @@ async function hash(text) {
 
 // проверка пароля
 async function checkPassword() {
-  const input = document.getElementById("password-input").value;
-  const hashed = await hash(input);
+  const input = document.getElementById("password-input").value.trim();
+
+  if (!input) {
+    passwordError.textContent = "Введите пароль";
+    return;
+  }
+
+  const hashed = await sha256(input);
 
   if (hashed === PASSWORD_HASH) {
     localStorage.setItem("access", "true");
+    passwordError.textContent = "";
     passwordScreen.classList.remove("active");
     showQuiz();
   } else {
-    document.getElementById("password-error").textContent =
-      "Неверный пароль";
+    passwordError.textContent = "Неверный пароль 💔";
   }
 }
 
@@ -75,6 +85,11 @@ function showQuiz() {
 function submitAnswer() {
   const value = answerInput.value.trim();
 
+  if (!value) {
+    answerError.textContent = "Напиши число 🙂";
+    return;
+  }
+
   if (value === questions[currentStep].answer) {
     currentStep++;
     localStorage.setItem("step", currentStep);
@@ -82,7 +97,7 @@ function submitAnswer() {
     answerError.textContent = "";
     showQuiz();
   } else {
-    answerError.textContent = "Подумай ещё 🙂";
+    answerError.textContent = "Подумай ещё 😉";
   }
 }
 
