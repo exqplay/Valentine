@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>💌</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Экран пароля -->
+  <div id="password-screen" class="screen active">
+    <h1>Небольшой секрет</h1>
+    <p>Введи пароль с открытки</p>
+    <input type="password" id="password-input" />
+    <button onclick="checkPassword()">Войти</button>
+    <p id="password-error" class="error"></p>
+  </div>
+
+  <!-- Экран загадок -->
+  <div id="quiz-screen" class="screen">
+    <h2 id="question-title"></h2>
+    <input type="number" id="answer-input" />
+    <button onclick="submitAnswer()">Ответить</button>
+    <p id="answer-error" class="error"></p>
+  </div>
+
+  <!-- Финал -->
+  <div id="final-screen" class="screen">
+    <h1>💖</h1>
+    <p class="final-text">
+      15.02.2026<br>
+      19:00 (MSK)<br><br>
+      <strong>Адрес ресторана</strong><br><br>
+      Ты мне нравишься.<br>
+      Я приглашаю тебя на свидание.<br><br>
+      Ты не обязана приходить,<br>
+      но я буду тебя ждать.
+    </p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
