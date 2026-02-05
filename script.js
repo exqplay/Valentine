@@ -1,7 +1,7 @@
 // ===== НАСТРОЙКИ =====
 
 // пароль → захешируй свой (см. ниже)
-const PASSWORD_HASH = "e3afed0047b08059d0fada10f400c1e5";
+const PASSWORD_HASH = "1baeaac16f20ceeb14f8e573cc8ae457";
 
 // загадки и ответы (ответы — числа)
 const questions = [
