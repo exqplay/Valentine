@@ -8,16 +8,16 @@ const PASSWORD_HASH =
 // загадки
 const questions = [
   {
-    text: "Сколько букв в слове «любовь»?",
-    answer: "6"
+    text: "James Buchanan-?? The President of the United States?",
+    answer: "15"
   },
   {
-    text: "Сколько месяцев в году?",
-    answer: "12"
+    text: "Второй месяц года?",
+    answer: "2"
   },
   {
-    text: "Сколько дней в феврале в невисокосный год?",
-    answer: "28"
+    text: "Текущий год?",
+    answer: "2026"
   }
 ];
 
