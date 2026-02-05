@@ -129,7 +129,6 @@ function showFinal() {
   // Через 1 секунду убираем overlay и запускаем построчную анимацию + пульс
   setTimeout(() => {
     overlay.classList.remove("active");
-    document.body.classList.add("heartbeat"); // лёгкий пульс
 
     const lines = document.querySelectorAll(".final-line");
     lines.forEach((line, index) => {

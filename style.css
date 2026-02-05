@@ -107,13 +107,3 @@ button {
 #overlay.active {
   opacity: 0.85;
 }
-
-/* Лёгкий пульс фона */
-body.heartbeat {
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.01); }
-}
