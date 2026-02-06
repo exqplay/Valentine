@@ -55,7 +55,7 @@ async function checkPassword() {
     switchScreen(passwordScreen, quizScreen);
     showQuiz();
   } else {
-    passwordError.textContent = "Неверный пароль";
+    passwordError.textContent = "Неверный пароль 💔";
   }
 }
 
@@ -82,7 +82,7 @@ function submitAnswer() {
     answerError.textContent = "";
     showQuiz();
   } else {
-    answerError.textContent = "Подумай ещё 🙂";
+    answerError.textContent = "Подумай ещё 😉";
   }
 }
 
