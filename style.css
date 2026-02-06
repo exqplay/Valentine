@@ -1,4 +1,3 @@
-/* ===== БАЗА ===== */
 * {
   box-sizing: border-box;
 }
@@ -11,7 +10,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #0f0f14;
-  color: #ffffff;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,22 +23,26 @@ body {
   padding: 0 16px;
 }
 
-/* ===== ЭКРАНЫ ===== */
+/* Экраны */
 .screen {
   display: none;
-  min-height: 70vh;
+  opacity: 0;
+  pointer-events: none;
 
+  min-height: 70vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 14px;
 
   text-align: center;
-  animation: fade 0.6s ease;
+  transition: opacity 0.6s ease;
 }
 
 .screen.active {
   display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .screen > * {
@@ -47,7 +50,7 @@ body {
   max-width: 320px;
 }
 
-/* ===== ТЕКСТ ===== */
+/* Текст */
 h1 {
   font-size: 1.8rem;
   margin: 0 0 8px;
@@ -70,7 +73,7 @@ p {
   min-height: 1.2em;
 }
 
-/* ===== INPUT / BUTTON ===== */
+/* Инпуты */
 input {
   padding: 14px;
   font-size: 1.1rem;
@@ -85,9 +88,8 @@ button {
   border-radius: 10px;
   border: none;
   background: #ff4d6d;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
 button:active {
@@ -95,19 +97,7 @@ button:active {
   opacity: 0.9;
 }
 
-/* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
-@keyframes fade {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== ДАТА (ПРОГРЕСС) ===== */
+/* Дата */
 #date-progress {
   font-size: 1.6rem;
   letter-spacing: 2px;
@@ -126,44 +116,35 @@ button:active {
 }
 
 @keyframes pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { opacity: 0; transform: scale(0.6); }
+  70% { opacity: 1; transform: scale(1.15); }
+  100% { transform: scale(1); }
 }
 
-/* ===== ПУЛЬС ЦИФР ДАТЫ ===== */
 @keyframes pulseDigit {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.3);
-  }
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
 }
 
 #date-progress span.pulse {
   animation: pulseDigit 0.4s ease-in-out;
 }
 
-/* ===== ФИНАЛ ===== */
+/* Финал */
 #final-screen h1 {
   font-size: 2.4rem;
   margin-bottom: 20px;
+}
+
+.final-date {
+  color: #ff4d6d;
+  font-weight: 600;
 }
 
 .final-line {
   font-size: 1.15rem;
   line-height: 1.6;
   margin-bottom: 8px;
-
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -174,7 +155,7 @@ button:active {
   transform: translateY(0);
 }
 
-/* ===== OVERLAY ===== */
+/* Overlay */
 #overlay {
   position: fixed;
   inset: 0;
@@ -189,17 +170,8 @@ button:active {
   opacity: 0.85;
 }
 
-/* ===== МОБИЛКА ===== */
+/* Мобилка */
 @media (max-width: 480px) {
-  html {
-    font-size: 19px;
-  }
-
-  .screen {
-    min-height: 80vh;
-  }
-
-  .final-line {
-    font-size: 1.2rem;
-  }
+  html { font-size: 19px; }
+  .screen { min-height: 80vh; }
 }

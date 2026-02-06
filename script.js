@@ -1,142 +1,114 @@
-// ===== НАСТРОЙКИ =====
-
-// SHA-256 хэш пароля
-// пароль: DASJKD12CDS
-const PASSWORD_HASH =
-  "a4963c50cd25fdf92fee9178af3655b0eaff2938adc1fa0e074d25e6f456fd74";
-
-// Загадки и ответы
-const questions = [
-  { text: "Текущий год?", answer: "2026" },
-  { text: "Февраль?", answer: "2" },
-  { text: "12+3?", answer: "15" }
-];
-
-// =====================
-
-let currentStep = Number(localStorage.getItem("step")) || 0;
-
-// DOM элементы
+// ===== ЭЛЕМЕНТЫ =====
 const passwordScreen = document.getElementById("password-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const finalScreen = document.getElementById("final-screen");
+const overlay = document.getElementById("overlay");
+
+const passwordInput = document.getElementById("password-input");
+const passwordError = document.getElementById("password-error");
+
 const questionTitle = document.getElementById("question-title");
 const answerInput = document.getElementById("answer-input");
 const answerError = document.getElementById("answer-error");
-const passwordError = document.getElementById("password-error");
+
 const dayEl = document.getElementById("day");
 const monthEl = document.getElementById("month");
 const yearEl = document.getElementById("year");
-const overlay = document.getElementById("overlay");
 
-// Автологин если уже вводили пароль
-if (localStorage.getItem("access") === "true") {
-  passwordScreen.classList.remove("active");
-  showQuiz();
+// ===== ДАННЫЕ =====
+const PASSWORD_HASH = "PASTE_YOUR_HASH_HERE";
+
+const questions = [
+  { question: "Первая загадка?", answer: 15 },
+  { question: "Вторая загадка?", answer: 2 },
+  { question: "Третья загадка?", answer: 2026 }
+];
+
+let currentStep = Number(localStorage.getItem("step")) || 0;
+
+// ===== ФУНКЦИИ =====
+function switchScreen(from, to) {
+  from.classList.remove("active");
+  setTimeout(() => {
+    to.classList.add("active");
+  }, 50);
 }
 
-// SHA-256 функция
-async function sha256(text) {
-  const data = new TextEncoder().encode(text);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(hashBuffer))
-    .map(b => b.toString(16).padStart(2, "0"))
-    .join("");
+function hash(str) {
+  return btoa(str);
 }
 
-// Проверка пароля
-async function checkPassword() {
-  const input = document.getElementById("password-input").value.trim();
-
-  if (!input) {
-    passwordError.textContent = "Введите пароль";
-    return;
-  }
-
-  const hashed = await sha256(input);
-
-  if (hashed === PASSWORD_HASH) {
-    localStorage.setItem("access", "true");
+function checkPassword() {
+  if (hash(passwordInput.value.trim()) === PASSWORD_HASH) {
     passwordError.textContent = "";
-    passwordScreen.classList.remove("active");
+    switchScreen(passwordScreen, quizScreen);
     showQuiz();
   } else {
-    passwordError.textContent = "Неверный пароль 💔";
+    passwordError.textContent = "Неверный пароль";
   }
 }
 
-// Обновление прогресса даты
-function updateDateProgress() {
-  if (currentStep >= 1) {
-    yearEl.textContent = "2026";
-    yearEl.classList.add("filled");
-  }
-  if (currentStep >= 2) {
-    monthEl.textContent = "02";
-    monthEl.classList.add("filled");
-  }
-  if (currentStep >= 3) {
-    dayEl.textContent = "15";
-    dayEl.classList.add("filled");
-  }
-}
-
-// Показ загадки
 function showQuiz() {
-  updateDateProgress();
-
   if (currentStep >= questions.length) {
     showFinal();
     return;
   }
 
-  quizScreen.classList.add("active");
-  questionTitle.textContent = questions[currentStep].text;
+  questionTitle.textContent = questions[currentStep].question;
+  answerInput.value = "";
+  updateDateProgress();
 }
 
-// Отправка ответа
 function submitAnswer() {
   const value = answerInput.value.trim();
-
-  if (!value) {
-    answerError.textContent = "Напиши число 🙂";
-    return;
-  }
+  if (!value) return;
 
   if (Number(value) === Number(questions[currentStep].answer)) {
     currentStep++;
     localStorage.setItem("step", currentStep);
-    answerInput.value = "";
     answerError.textContent = "";
     showQuiz();
   } else {
-    answerError.textContent = "Подумай ещё 😉";
+    answerError.textContent = "Подумай ещё 🙂";
   }
 }
 
-// Финальный экран с анимацией
-function showFinal() {
-  // Показываем финальный экран сразу
-  quizScreen.classList.remove("active");
-  finalScreen.classList.add("active");
+function updateDateProgress() {
+  const parts = ["__", "__", "____"];
+  if (currentStep >= 1) parts[0] = "15";
+  if (currentStep >= 2) parts[1] = "02";
+  if (currentStep >= 3) parts[2] = "2026";
 
-  // Дата остаётся на секунду
-  updateDateProgress();
-
-  // Затемнение overlay
-  overlay.classList.add("active");
-
-  // Через 1 секунду убираем overlay и запускаем построчную анимацию + пульс
-  setTimeout(() => {
-    overlay.classList.remove("active");
-
-    const lines = document.querySelectorAll(".final-line");
-    lines.forEach((line, index) => {
-      setTimeout(() => line.classList.add("visible"), index * 800);
-    });
-  }, 1000); // 1 секунда пауза для демонстрации даты
+  [dayEl, monthEl, yearEl].forEach((el, i) => {
+    el.textContent = parts[i];
+    if (!parts[i].includes("_")) el.classList.add("filled");
+  });
 }
 
-// Вспомогательная кнопка для теста (очистка прогресса)
-// Можно временно добавить в HTML:
-// <button onclick="localStorage.clear(); location.reload();">Сбросить прогресс</button>
+function showFinal() {
+  switchScreen(quizScreen, finalScreen);
+  updateDateProgress();
+  overlay.classList.add("active");
+
+  [dayEl, monthEl, yearEl].forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add("pulse");
+      setTimeout(() => el.classList.remove("pulse"), 400);
+    }, i * 500);
+  });
+
+  setTimeout(() => {
+    overlay.classList.remove("active");
+    document.querySelectorAll(".final-line")
+      .forEach((line, i) =>
+        setTimeout(() => line.classList.add("visible"), i * 800)
+      );
+  }, 2000);
+}
+
+// ===== АВТОЗАПУСК =====
+if (currentStep > 0) {
+  passwordScreen.classList.remove("active");
+  quizScreen.classList.add("active");
+  showQuiz();
+}
