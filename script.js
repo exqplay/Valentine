@@ -19,9 +19,9 @@ const yearEl = document.getElementById("year");
 const PASSWORD_HASH = "a4963c50cd25fdf92fee9178af3655b0eaff2938adc1fa0e074d25e6f456fd74";
 
 const questions = [
-  { question: "Первая загадка?", answer: 15 },
-  { question: "Вторая загадка?", answer: 2 },
-  { question: "Третья загадка?", answer: 2026 }
+  { question: "Первая загадка?", answer: 2 },
+  { question: "Вторая загадка?", answer: 2026 },
+  { question: "Третья загадка?", answer: 15 }
 ];
 
 let currentStep = Number(localStorage.getItem("step")) || 0;
@@ -89,9 +89,9 @@ function submitAnswer() {
 // Обновление прогресса даты
 function updateDateProgress() {
   const parts = ["__", "__", "____"];
-  if (currentStep >= 1) parts[0] = "15";
-  if (currentStep >= 2) parts[1] = "02";
-  if (currentStep >= 3) parts[2] = "2026";
+  if (currentStep >= 1) parts[0] = "02";
+  if (currentStep >= 2) parts[1] = "2026";
+  if (currentStep >= 3) parts[2] = "15";
 
   [dayEl, monthEl, yearEl].forEach((el, i) => {
     el.textContent = parts[i];
