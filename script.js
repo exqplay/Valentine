@@ -16,7 +16,7 @@ const monthEl = document.getElementById("month");
 const yearEl = document.getElementById("year");
 
 // ===== ДАННЫЕ =====
-const PASSWORD_HASH = "a4963c50cd25fdf92fee9178af3655b0eaff2938adc1fa0e074d25e6f456fd74";
+const PASSWORD_HASH = "54cf4e60deae7f2028893d71a104f0e2b8f2ac43e4559685eac5b80ffaab5e1c";
 
 const questions = [
   { question: "Первая загадка?", answer: 2 },
