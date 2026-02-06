@@ -1,4 +1,7 @@
-/* Базовые стили */
+/* ===== БАЗА ===== */
+* {
+  box-sizing: border-box;
+}
 
 html {
   font-size: 18px;
@@ -6,88 +9,162 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #0f0f14;
-  color: #fff;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  transition: transform 0.3s ease;
 }
 
 #app {
-  max-width: 360px;
   width: 100%;
-  text-align: center;
+  max-width: 380px;
+  padding: 0 16px;
 }
 
-/* Экраны */
+/* ===== ЭКРАНЫ ===== */
 .screen {
   display: none;
+  min-height: 70vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+
+  text-align: center;
   animation: fade 0.6s ease;
 }
 
 .screen.active {
-  display: block;
+  display: flex;
 }
 
-/* Ввод и кнопки */
-input {
+.screen > * {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: none;
+  max-width: 320px;
 }
 
-button {
-  margin-top: 15px;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  border-radius: 8px;
-  background: #ff4d6d;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+/* ===== ТЕКСТ ===== */
+h1 {
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: 0 0 12px;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .error {
   color: #ff6b6b;
-  margin-top: 10px;
+  font-size: 0.95rem;
+  min-height: 1.2em;
 }
 
-/* Анимация fade */
+/* ===== INPUT / BUTTON ===== */
+input {
+  padding: 14px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 14px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: none;
+  background: #ff4d6d;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
 @keyframes fade {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Прогресс даты */
+/* ===== ДАТА (ПРОГРЕСС) ===== */
 #date-progress {
-  margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 1.6rem;
   letter-spacing: 2px;
+  margin-bottom: 24px;
   color: #ffb3c1;
-  animation: fade 0.5s ease;
+}
+
+#date-progress span {
+  display: inline-block;
 }
 
 #date-progress span.filled {
   color: #ff4d6d;
-  font-weight: bold;
+  font-weight: 600;
   animation: pop 0.4s ease;
 }
 
 @keyframes pop {
-  0% { opacity: 0; transform: scale(0.6); }
-  70% { opacity: 1; transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-/* Финальный текст построчно */
+/* ===== ПУЛЬС ЦИФР ДАТЫ ===== */
+@keyframes pulseDigit {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+#date-progress span.pulse {
+  animation: pulseDigit 0.4s ease-in-out;
+}
+
+/* ===== ФИНАЛ ===== */
+#final-screen h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
 .final-line {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -98,7 +175,7 @@ button {
   transform: translateY(0);
 }
 
-/* Overlay затемнение */
+/* ===== OVERLAY ===== */
 #overlay {
   position: fixed;
   inset: 0;
@@ -113,57 +190,14 @@ button {
   opacity: 0.85;
 }
 
-
-h1 {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
-}
-
-h2 {
-  font-size: 1.4rem;
-  margin-bottom: 16px;
-}
-
-p {
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-input {
-  font-size: 1.1rem;
-  padding: 14px;
-}
-
-button {
-  font-size: 1.1rem;
-  padding: 14px;
-}
-
-
-#date-progress {
-  font-size: 1.6rem;
-  margin-bottom: 24px;
-}
-
-#final-screen h1 {
-  font-size: 2.4rem;
-  margin-bottom: 20px;
-}
-
-.final-line {
-  font-size: 1.15rem;
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
-
-
+/* ===== МОБИЛКА ===== */
 @media (max-width: 480px) {
   html {
     font-size: 19px;
   }
 
-  #app {
-    padding: 0 10px;
+  .screen {
+    min-height: 80vh;
   }
 
   .final-line {
