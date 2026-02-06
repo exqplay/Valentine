@@ -1,4 +1,9 @@
 /* Базовые стили */
+
+html {
+  font-size: 18px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -106,4 +111,62 @@ button {
 
 #overlay.active {
   opacity: 0.85;
+}
+
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+input {
+  font-size: 1.1rem;
+  padding: 14px;
+}
+
+button {
+  font-size: 1.1rem;
+  padding: 14px;
+}
+
+
+#date-progress {
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+}
+
+#final-screen h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+.final-line {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+
+@media (max-width: 480px) {
+  html {
+    font-size: 19px;
+  }
+
+  #app {
+    padding: 0 10px;
+  }
+
+  .final-line {
+    font-size: 1.2rem;
+  }
 }
