@@ -20,7 +20,7 @@ const PASSWORD_HASH = "54cf4e60deae7f2028893d71a104f0e2b8f2ac43e4559685eac5b80ff
 
 const questions = [
   { question: "Первая загадка?", answer: 2 },
-  { question: "Вторая загадка?", answer: 2026 },
+  { question: "Add to the year of your birth the age at which people legally start drinking in America (and already trying to stop drinking in Russia) 😊", answer: 2026 },
   { question: "Третья загадка?", answer: 15 }
 ];
 
