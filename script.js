@@ -1,4 +1,5 @@
 // ===== ЭЛЕМЕНТЫ =====
+const questionImage = document.getElementById("question-image");
 const passwordScreen = document.getElementById("password-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const finalScreen = document.getElementById("final-screen");
@@ -19,9 +20,9 @@ const yearEl = document.getElementById("year");
 const PASSWORD_HASH = "54cf4e60deae7f2028893d71a104f0e2b8f2ac43e4559685eac5b80ffaab5e1c";
 
 const questions = [
-  { question: "Первая загадка?", answer: 2 },
+  { question: "这位俄罗斯流行歌星有多少孩子?", answer: 2 },
   { question: "Add to the year of your birth the age at which people legally start drinking in America (and already trying to stop drinking in Russia) 😊", answer: 2026 },
-  { question: "Третья загадка?", answer: 15 }
+  { question: "Daniel Ocean a déjà Onze amis.Ajoute Les Beatles. Combien sont-ils maintenant?", answer: 15 }
 ];
 
 let currentStep = Number(localStorage.getItem("step")) || 0;
@@ -68,6 +69,17 @@ function showQuiz() {
   questionTitle.textContent = questions[currentStep].question;
   answerInput.value = "";
   answerError.textContent = "";
+
+
+
+  if (currentStep === 0) {
+    questionImage.src = "https://drive.google.com/file/d/1IqAaCHtUewZBe9oj64WVmG41GcSWNn0H/view?usp=sharing"; // путь к картинке
+    questionImage.style.display = "block";
+  } else {
+    questionImage.style.display = "none";
+  }
+
+
   updateDateProgress();
 }
 

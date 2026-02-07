@@ -175,3 +175,10 @@ button:active {
   html { font-size: 19px; }
   .screen { min-height: 80vh; }
 }
+
+#question-image {
+  max-width: 220px;
+  margin: 20px auto;
+  display: none;
+  opacity: 0.9;
+}
