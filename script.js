@@ -135,7 +135,6 @@ function updateDateProgress() {
 function showFinal() {
   switchScreen(quizScreen, finalScreen);
   updateDateProgress();
-  overlay.classList.add("active");
 
   [dayEl, monthEl, yearEl].forEach((el, i) => {
     setTimeout(() => {
@@ -145,7 +144,6 @@ function showFinal() {
   });
 
   setTimeout(() => {
-    overlay.classList.remove("active");
     document.querySelectorAll(".final-line")
       .forEach((line, i) =>
         setTimeout(() => line.classList.add("visible"), i * 800)
