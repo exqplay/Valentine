@@ -88,16 +88,34 @@ function submitAnswer() {
 
 // Обновление прогресса даты
 function updateDateProgress() {
-  const parts = ["__", "__", "____"];
-  if (currentStep >= 1) parts[0] = "02";
-  if (currentStep >= 2) parts[1] = "2026";
-  if (currentStep >= 3) parts[2] = "15";
+  // по умолчанию пусто
+  dayEl.textContent = "__";
+  monthEl.textContent = "__";
+  yearEl.textContent = "____";
 
-  [monthEl, yearEl, dayEl].forEach((el, i) => {
-    el.textContent = parts[i];
-    if (!parts[i].includes("_")) el.classList.add("filled");
-  });
+  dayEl.classList.remove("filled");
+  monthEl.classList.remove("filled");
+  yearEl.classList.remove("filled");
+
+  // 1-я загадка → месяц (центр)
+  if (currentStep >= 1) {
+    monthEl.textContent = "02";
+    monthEl.classList.add("filled");
+  }
+
+  // 2-я загадка → год
+  if (currentStep >= 2) {
+    yearEl.textContent = "2026";
+    yearEl.classList.add("filled");
+  }
+
+  // 3-я загадка → день
+  if (currentStep >= 3) {
+    dayEl.textContent = "15";
+    dayEl.classList.add("filled");
+  }
 }
+
 
 // Финальный экран
 function showFinal() {
