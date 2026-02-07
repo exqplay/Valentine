@@ -73,7 +73,7 @@ function showQuiz() {
 
 
   if (currentStep === 0) {
-    questionImage.src = "phill.jpg"; // путь к картинке
+    questionImage.src = "phill.png"; // путь к картинке
     questionImage.style.display = "block";
   } else {
     questionImage.style.display = "none";
