@@ -177,7 +177,7 @@ button:active {
 }
 
 #question-image {
-  max-width: 220px;
+  max-width: 250px;
   margin: 20px auto;
   display: none;
   opacity: 0.9;
