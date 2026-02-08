@@ -182,3 +182,16 @@ button:active {
   display: none;
   opacity: 0.9;
 }
+
+#final-hedgehog {
+  margin-top: 24px;
+  width: 180px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#final-hedgehog.visible {
+  opacity: 0.9;
+  transform: translateY(0);
+}

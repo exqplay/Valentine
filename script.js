@@ -157,12 +157,25 @@ function showFinal() {
   });
 
   setTimeout(() => {
-    overlay.classList.remove("active");
-    document.querySelectorAll(".final-line")
-      .forEach((line, i) =>
-        setTimeout(() => line.classList.add("visible"), i * 800)
-      );
-  }, 2000);
+  overlay.classList.remove("active");
+
+  const lines = document.querySelectorAll(".final-line");
+
+  lines.forEach((line, i) => {
+    setTimeout(() => {
+      line.classList.add("visible");
+    }, i * 800);
+  });
+
+  setTimeout(() => {
+    document
+      .getElementById("final-hedgehog")
+      .classList.add("visible");
+  }, lines.length * 800 + 400);
+
+}, 2000);
+
+
 }
 
 // Автозапуск, если уже есть прогресс
